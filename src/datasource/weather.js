@@ -24,9 +24,20 @@ class AgroAPI extends RESTDataSource {
     return this.soilReducer(response)
   }
 
-  async getSatImages() {
+  async getSatData() {
     const response = await this.get(`image/search?start=1577836800&end=1583838000&polyid=5e66f15ff6e0ca64d7708957&appid=${API_KEY}`)
-    return Array.isArray(response) ? response.map(response => this.imageReducer(response)) : []
+    
+    const result = Array.isArray(response) ? response.map(response => this.imageReducer(response)) : []
+    const source = response.map(response => (response.image.truecolor).split('http://api.agromonitoring.com/image/1.0/').pop().replace('?appid=7ec34029dcc8c6b56df9631773cbe5c7', '')) 
+    console.log(source[0])
+    return result
+  }
+
+  async getImages() {
+    const source = getSatImages();
+    const response = await this.get(`${source[0]}?appid=${API_KEY}`)
+    console.log(response)
+    return response
   }
 
   async getNDVI() {

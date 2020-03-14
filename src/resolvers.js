@@ -3,7 +3,7 @@ module.exports = {
     weather: (_, __, { dataSources }) => dataSources.weatherAPI.getCurrentWeather(),
     forecast: (_, __, { dataSources }) => dataSources.weatherAPI.getForecast(),
     soil: (_, __, { dataSources }) => dataSources.weatherAPI.getSoil(),
-    images: (_, __, { dataSources }) => dataSources.weatherAPI.getSatImages(),
+    images: (_, __, { dataSources }) => dataSources.weatherAPI.getSatData(),
     ndvi: (_, __, { dataSources }) => dataSources.weatherAPI.getNDVI(),
     uvi: (_, __, { dataSources }) => dataSources.weatherAPI.getUVI()
   }
