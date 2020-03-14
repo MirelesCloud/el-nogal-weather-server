@@ -8,6 +8,8 @@ require('dotenv').config({path: __dirname + '/.env'})
 const server = new ApolloServer({ 
   typeDefs,
   resolvers,
+  introspection: true,
+  playground: true,
   dataSources: () => ({
     weatherAPI: new AgroAPI(),
   })
