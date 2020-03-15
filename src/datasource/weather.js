@@ -142,13 +142,19 @@ class AgroAPI extends RESTDataSource {
   ndviReducer(response) {
     return {
       dt: response.dt,
-      p75: response.p75,
-      min: response.min,
-      max: response.max,
-      median: response.median,
-      p25: response.p25,
-      num: response.num,
-      mean: response.mean
+      source: response.source,
+      zoom: response.zoom,
+      dc: response.dc,
+      cl: response.cl,
+      data: {
+        p75: response.data.p75,
+        min: response.data.min,
+        max: response.data.max,
+        median: response.data.median,
+        p25: response.data.p25,
+        num: response.data.num,
+        mean: response.data.mean
+      }
     }
   }
 
