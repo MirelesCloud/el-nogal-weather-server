@@ -120,10 +120,10 @@ class AgroAPI extends RESTDataSource {
         elevation: response.sun.elevation
       },
       image: {
-        truecolor: response.tile.truecolor,
-        falsecolor: response.tile.falsecolor,
-        ndvi: response.tile.ndvi,
-        evi: response.tile.evi
+        truecolor: response.image.truecolor,
+        falsecolor: response.image.falsecolor,
+        ndvi: response.image.ndvi,
+        evi: response.image.evi
       },
       tile: {
         truecolor: response.tile.truecolor,
