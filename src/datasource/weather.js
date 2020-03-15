@@ -27,10 +27,8 @@ class AgroAPI extends RESTDataSource {
   async getSatData() {
     const response = await this.get(`image/search?start=1577836800&end=1583838000&polyid=5e66f15ff6e0ca64d7708957&appid=${API_KEY}`)
     
-    const result = Array.isArray(response) ? response.map(response => this.imageReducer(response)) : []
-    const source = response.map(response => (response.image.truecolor).split('http://api.agromonitoring.com/image/1.0/').pop().replace('?appid=7ec34029dcc8c6b56df9631773cbe5c7', '')) 
-    console.log(source[0])
-    return result
+  
+    return Array.isArray(response) ? response.map(response => this.imageReducer(response)) : []
   }
 
   async getImages() {
@@ -117,11 +115,32 @@ class AgroAPI extends RESTDataSource {
       type: response.type,
       dc: response.dc,
       cl: response.cl,
-      sun: response.sun,
-      image: response.image,
-      tile: response.tile,
-      stats: response.stats,
-      data: response.data
+      sun: {
+        azimuth: response.sun.azimuth,
+        elevation: response.sun.elevation
+      },
+      image: {
+        truecolor: response.tile.truecolor,
+        falsecolor: response.tile.falsecolor,
+        ndvi: response.tile.ndvi,
+        evi: response.tile.evi
+      },
+      tile: {
+        truecolor: response.tile.truecolor,
+        falsecolor: response.tile.falsecolor,
+        ndvi: response.tile.ndvi,
+        evi: response.tile.evi
+      },
+      stats: {
+        ndvi: response.stats.ndvi,
+        evi: response.stats.evi
+      },
+      data: {
+        truecolor: response.data.truecolor,
+        falsecolor: response.data.falsecolor,
+        ndvi: response.data.ndvi,
+        evi: response.data.evi,
+      }
     }
   }
 

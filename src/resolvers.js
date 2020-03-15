@@ -6,5 +6,6 @@ module.exports = {
     images: (_, __, { dataSources }) => dataSources.weatherAPI.getSatData(),
     ndvi: (_, __, { dataSources }) => dataSources.weatherAPI.getNDVI(),
     uvi: (_, __, { dataSources }) => dataSources.weatherAPI.getUVI()
+    
   }
 }
