@@ -36,7 +36,7 @@ class AgroAPI extends RESTDataSource {
   async getNDVI() {
     let end = (new Date()/1000).toFixed(0);
     let start = new Date()
-    start.setMonth(start.getMonth() - 4)
+    start.setMonth(start.getMonth() - 6)
     start = (start/1000).toFixed(0)
     const response = await this.get(`ndvi/history?start=${start}&end=${end}&polyid=5e66f15ff6e0ca64d7708957&appid=${API_KEY}`)
     return Array.isArray(response) ? response.map(response => this.ndviReducer(response)) : []
