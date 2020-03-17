@@ -20,7 +20,7 @@ const typeDefs = gql`
   }
   
   type Weather {
-    id: ID 
+    id: Int
     main: String
     description: String
     icon: String
