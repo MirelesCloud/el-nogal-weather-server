@@ -104,7 +104,7 @@ const typeDefs = gql`
     dt: Int
     source: String
     zoom: Int
-    dc: Int
+    dc: Float
     cl: Float
     data: NDVIData
   }
