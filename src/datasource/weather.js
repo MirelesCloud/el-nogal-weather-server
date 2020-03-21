@@ -11,8 +11,6 @@ class AgroAPI extends RESTDataSource {
 
   async getCurrentWeather() {
     const response = await this.get(`weather?polyid=5e66f15ff6e0ca64d7708957&appid=${API_KEY}`)
-    console.log(response)
-   // response.weather.map(response => this.weatherReducer(response))
     return this.weatherReducer(response)
   }
 
@@ -57,7 +55,8 @@ class AgroAPI extends RESTDataSource {
         {
           id: response.weather.id,
           main: response.weather.main,
-          description: response.weather.description
+          description: response.weather.description,
+          icon: response.weather.icon
         }
       ],
       main: {
