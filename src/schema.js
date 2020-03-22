@@ -3,7 +3,7 @@ const { gql } = require('apollo-server');
 const typeDefs = gql`
   type CurrentWeather {
     dt: Int
-    weather: [Weather]
+    weather: Weather
     main: Main
     wind: Wind
     clouds: Clouds
@@ -11,7 +11,7 @@ const typeDefs = gql`
 
   type Forecast {
     dt: Int
-    weather: [Weather]
+    weather: Weather
     main: Main
     wind: Wind
     rain: Rain

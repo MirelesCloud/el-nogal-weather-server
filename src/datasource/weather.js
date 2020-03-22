@@ -11,6 +11,22 @@ class AgroAPI extends RESTDataSource {
 
   async getCurrentWeather() {
     const response = await this.get(`weather?polyid=5e66f15ff6e0ca64d7708957&appid=${API_KEY}`)
+    
+   const convertArray = (array) => {
+     const initialValue = {};
+     return array.reduce((obj, item) => {
+       return {
+         ...obj,
+         [item]: item,
+       };
+     }, initialValue)
+   }
+   
+    const result = {}
+    Object.assign(result, response.weather[0])
+    delete response.weather
+    response.weather = result
+    
     return this.weatherReducer(response)
   }
 
@@ -46,11 +62,9 @@ class AgroAPI extends RESTDataSource {
     const response = await this.get(`uvi?polyid=5e66f15ff6e0ca64d7708957&appid=${API_KEY}`)
     return this.uviReducer(response)
   }
-
-
-  weatherReducer(response) {
+ 
+  arrayReducer(response) {
     return {
-      dt: response.dt, 
       weather: [
         {
           id: response.weather.id,
@@ -59,6 +73,18 @@ class AgroAPI extends RESTDataSource {
           icon: response.weather.icon
         }
       ],
+    }
+  }
+
+  weatherReducer(response) {
+    return {
+      dt: response.dt, 
+      weather: {
+          id: response.weather.id,
+          main: response.weather.main,
+          description: response.weather.description,
+          icon: response.weather.icon
+        },
       main: {
         temp: response.main.temp, 
         pressure: response.main.pressure,
