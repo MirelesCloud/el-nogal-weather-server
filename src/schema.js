@@ -11,7 +11,7 @@ const typeDefs = gql`
 
   type Forecast {
     dt: Int
-    weather: Weather
+    weather: [Weather]
     main: Main
     wind: Wind
     rain: Rain
