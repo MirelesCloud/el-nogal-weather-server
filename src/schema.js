@@ -60,7 +60,7 @@ const typeDefs = gql`
   type SatImages {
     dt: Int
     type: String
-    dc: Int
+    dc: Float
     cl: Float
     sun: Sun
     image: Image
