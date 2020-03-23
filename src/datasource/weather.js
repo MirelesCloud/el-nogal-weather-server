@@ -71,18 +71,6 @@ class AgroAPI extends RESTDataSource {
     return this.uviReducer(response)
   }
  
-  arrayReducer(response) {
-    return {
-      weather: [
-        {
-          id: response.weather.id,
-          main: response.weather.main,
-          description: response.weather.description,
-          icon: response.weather.icon
-        }
-      ],
-    }
-  }
 
   weatherReducer(response) {
     return {
@@ -130,6 +118,12 @@ class AgroAPI extends RESTDataSource {
       clouds: {
         all: response.clouds.all
       },
+      weather: {
+        id: response.weather.id,
+        main: response.weather.main,
+        description: response.weather.description,
+        icon: response.weather.icon
+      }
     }
   }
 
