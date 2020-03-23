@@ -32,6 +32,14 @@ class AgroAPI extends RESTDataSource {
 
   async getForecast() {
     const response = await this.get(`weather/forecast?polyid=5e66f15ff6e0ca64d7708957&appid=${API_KEY}`)
+    
+    response.map(i => {
+      const result = {}
+      Object.assign(result, i.weather[0]),
+      delete i.weather
+      i.weather = result
+    })
+    
     return Array.isArray(response) ? response.map(response => this.forecastReducer(response) ): []
   }
 
