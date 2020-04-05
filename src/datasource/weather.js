@@ -3,6 +3,19 @@ const { RESTDataSource } = require('apollo-datasource-rest');
 
 const API_KEY = process.env['AGRO_API_KEY']
 
+class IrriSatAPI extends RESTDataSource {
+  constructor() {
+    super();
+    this.baseURL = 'https://irrisat-cloud.appspot.com/_ah/api/irrisat/v1/services/forecast/evapotranspiration/'
+  }
+
+  async getEvapoTranspiration() {
+    const response = await this.get('evapotranspiration/36.375639/-119.646130')
+    console.log(response)
+    return response
+  }
+}
+
 class AgroAPI extends RESTDataSource {
   constructor() {
     super();
@@ -12,16 +25,6 @@ class AgroAPI extends RESTDataSource {
   async getCurrentWeather() {
     const response = await this.get(`weather?polyid=5e66f15ff6e0ca64d7708957&appid=${API_KEY}`)
     
-   const convertArray = (array) => {
-     const initialValue = {};
-     return array.reduce((obj, item) => {
-       return {
-         ...obj,
-         [item]: item,
-       };
-     }, initialValue)
-   }
-   
     const result = {}
     Object.assign(result, response.weather[0])
     delete response.weather
@@ -49,7 +52,9 @@ class AgroAPI extends RESTDataSource {
   }
 
   async getSatData() {
-    let end = (new Date()/1000).toFixed(0);
+    let end = new Date();
+    end.setDate(end.getDate() - 1)
+    end = (end/1000).toFixed(0)
     let start = new Date()
     start.setMonth(start.getMonth() - 6)
     start = (start/1000).toFixed(0)
@@ -58,11 +63,14 @@ class AgroAPI extends RESTDataSource {
   }
 
   async getNDVI() {
-    let end = (new Date()/1000).toFixed(0);
+    let end = new Date();
+    end.setDate(end.getDate() - 1)
+    end = (end/1000).toFixed(0)
     let start = new Date()
     start.setMonth(start.getMonth() - 6)
     start = (start/1000).toFixed(0)
     const response = await this.get(`ndvi/history?start=${start}&end=${end}&polyid=5e66f15ff6e0ca64d7708957&appid=${API_KEY}`)
+    console.log(response)
     return Array.isArray(response) ? response.map(response => this.ndviReducer(response)) : []
   }
 
