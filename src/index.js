@@ -1,6 +1,6 @@
 const { ApolloServer } = require('apollo-server');
 const typeDefs = require('./schema');
-const AgroAPI = require('./datasource/weather');
+const {AgroAPI, IrriSatAPI} = require('./datasource/weather');
 const resolvers = require('./resolvers');
 
 require('dotenv').config({path: __dirname + '/.env'})
@@ -12,6 +12,7 @@ const server = new ApolloServer({
   playground: true,
   dataSources: () => ({
     weatherAPI: new AgroAPI(),
+    irriSatAPI: new IrriSatAPI(),
   })
 });
 

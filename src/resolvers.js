@@ -5,7 +5,10 @@ module.exports = {
     soil: (_, __, { dataSources }) => dataSources.weatherAPI.getSoil(),
     images: (_, __, { dataSources }) => dataSources.weatherAPI.getSatData(),
     ndvi: (_, __, { dataSources }) => dataSources.weatherAPI.getNDVI(),
-    uvi: (_, __, { dataSources }) => dataSources.weatherAPI.getUVI()
-    
+    uvi: (_, __, { dataSources }) => dataSources.weatherAPI.getUVI(),
+    daily: (_, __, { dataSources }) => dataSources.irriSatAPI.getEvapoTranspiration(),
+    series: (_, __, { dataSources }) => dataSources.irriSatAPI.getEvapoTranspiration(),
+    geometry: (_, __, { dataSources }) => dataSources.irriSatAPI.getCropGrowth()
+
   }
 }

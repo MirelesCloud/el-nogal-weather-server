@@ -6,15 +6,42 @@ const API_KEY = process.env['AGRO_API_KEY']
 class IrriSatAPI extends RESTDataSource {
   constructor() {
     super();
-    this.baseURL = 'https://irrisat-cloud.appspot.com/_ah/api/irrisat/v1/services/forecast/evapotranspiration/'
+    this.baseURL = 'https://irrisat-cloud.appspot.com/_ah/api/irrisat/v1/services/'
   }
 
   async getEvapoTranspiration() {
-    const response = await this.get('evapotranspiration/36.375639/-119.646130')
+    const response = await this.get('forecast/evapotranspiration/36.375639/-119.646130')
+    console.log(response)
+    return response.Daily.map(response => this.dailyReducer(response))
+  }
+
+  dailyReducer(response) {
+    return {
+      et0: response.ET0,
+      date: response.Date,
+      description: response.Description,
+      icon: response.Icon
+    }
+  }
+  
+  
+  async getCropGrowth() {
+    const params = {
+      "Start": "2019-05-01T00:00:00",
+      "End": "2019 -06-01T00:00:00",
+      "ManagementUnit": {
+      "Geometry": "POLYGON((36.372017, -119.648216,36.378081, -119.648216, 36.378141, -119.647111,36.379126, -119.646993,36.379118, -119.644654,36.378694, -119.644557,36.378651, -119.643881,36.373805, -119.643892,36.373779, -119.646081,36.372034, -119.646091))"
+      }
+    }
+
+    const response = await this.post('data/cropgrowth', {body: params}).catch((err) => {console.log(err)})
     console.log(response)
     return response
   }
+  
 }
+
+
 
 class AgroAPI extends RESTDataSource {
   constructor() {
@@ -79,6 +106,7 @@ class AgroAPI extends RESTDataSource {
     return this.uviReducer(response)
   }
  
+  
 
   weatherReducer(response) {
     return {
@@ -208,4 +236,4 @@ class AgroAPI extends RESTDataSource {
   
 }
 
-module.exports = AgroAPI;
+module.exports = { AgroAPI, IrriSatAPI };

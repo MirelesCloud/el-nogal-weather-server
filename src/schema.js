@@ -125,6 +125,27 @@ const typeDefs = gql`
     uvi: Float
   }
 
+  type IrriSat {
+    series: Series
+    daily: [Daily]
+    forecast: String
+  }
+
+  type Series {
+    timestamp: [String]
+    et0tall: [Float]
+    et0short: [Float]
+
+  }
+
+  type Daily {
+    date: String
+    et0: Float
+    description: String
+    precipitation: Int
+    icon: String
+  }
+
   type Query {
     weather: CurrentWeather
     forecast: [Forecast]
@@ -132,6 +153,11 @@ const typeDefs = gql`
     images: [SatImages]
     ndvi: [NDVI]
     uvi: UVI
+    irrisat: IrriSat
+    daily: [Daily]
+    series: Series
+    geometry: String
+    
   }
 `;
 
