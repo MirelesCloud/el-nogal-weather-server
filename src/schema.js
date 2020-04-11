@@ -137,7 +137,8 @@ const typeDefs = gql`
     et0short: [Float]
 
   }
-
+  
+  
   type Daily {
     date: String
     et0: Float

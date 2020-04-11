@@ -20,7 +20,8 @@ class IrriSatAPI extends RESTDataSource {
       et0: response.ET0,
       date: response.Date,
       description: response.Description,
-      icon: response.Icon
+      icon: response.Icon,
+      precipitation: response.PrecipProbability
     }
   }
   
