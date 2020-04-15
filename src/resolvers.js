@@ -8,7 +8,10 @@ module.exports = {
     uvi: (_, __, { dataSources }) => dataSources.weatherAPI.getUVI(),
     daily: (_, __, { dataSources }) => dataSources.irriSatAPI.getEvapoTranspiration(),
     series: (_, __, { dataSources }) => dataSources.irriSatAPI.getEvapoTranspiration(),
-    geometry: (_, __, { dataSources }) => dataSources.irriSatAPI.getCropGrowth()
+    mapsDates: (_, __, { dataSources }) => dataSources.irriSatAPI.getMapsDates(),
+    mapsLayers: (_, __, { dataSources }) => dataSources.irriSatAPI.getMapsLayer(),
+    cropGrowth: (_, __, { dataSources }) => dataSources.irriSatAPI.getCropGrowth(),
+
 
   }
 }

@@ -124,6 +124,21 @@ const typeDefs = gql`
     dt: Int
     uvi: Float
   }
+  
+  type MapsDates {
+    date: String
+    dateurl: String
+  }
+
+  type MapsLayers {
+    token: String
+    mapid: String
+    name: String
+  }
+
+  type CropGrowth {
+    geometry: String
+  }
 
   type IrriSat {
     series: Series
@@ -137,7 +152,6 @@ const typeDefs = gql`
     et0short: [Float]
 
   }
-  
   
   type Daily {
     date: String
@@ -157,7 +171,9 @@ const typeDefs = gql`
     irrisat: IrriSat
     daily: [Daily]
     series: Series
-    geometry: String
+    mapsDates: [MapsDates]
+    mapsLayers: [MapsLayers]
+    cropGrowth: CropGrowth
     
   }
 `;

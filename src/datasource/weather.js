@@ -9,9 +9,54 @@ class IrriSatAPI extends RESTDataSource {
     this.baseURL = 'https://irrisat-cloud.appspot.com/_ah/api/irrisat/v1/services/'
   }
 
+  async getMapsDates() {
+    const response = await this.get('maps/dates')
+    return Array.isArray(response.items) ? response.items.map(response => this.mapsDatesReducer(response)) : []
+  }
+
+  mapsDatesReducer(response) {
+    return {
+      date: response.date,
+      dateurl: response.dateurl,
+    }
+  }
+
+  async getMapsLayer() {
+    const date = new Date()
+    const response = await this.get(`maps/layers/2020-04-06`)
+    console.log(response)
+    return Array.isArray(response.items) ? response.items.map(response => this.mapsLayerReducer(response)) : []
+  }
+
+  mapsLayerReducer(response) {
+    return {
+      token: response.token,
+      mapid: response.mapid,
+      name: response.name
+    }
+  }
+
+  async getCropGrowth() {
+    const params = {
+      "Start": "2019-05-01T00:00:00",
+      "End": "2020 -04-01T00:00:00",
+      "ManagementUnit": {
+      "Geometry": "POLYGON((36.372017, -119.648216,36.378081, -119.648216, 36.378141, -119.647111,36.379126, -119.646993,36.379118, -119.644654,36.378694, -119.644557,36.378651, -119.643881,36.373805, -119.643892,36.373779, -119.646081,36.372034, -119.646091))"
+      }
+    }
+
+    const response = await this.post('data/cropgrowth', {body: params}).catch((err) => {console.log(err)})
+    return response
+  }
+
+  cropGrowthReducer(response) {
+    return {
+      geometry: response.geometry,
+    }
+  }
+
   async getEvapoTranspiration() {
     const response = await this.get('forecast/evapotranspiration/36.375639/-119.646130')
-    console.log(response)
     return response.Daily.map(response => this.dailyReducer(response))
   }
 
@@ -26,19 +71,7 @@ class IrriSatAPI extends RESTDataSource {
   }
   
   
-  async getCropGrowth() {
-    const params = {
-      "Start": "2019-05-01T00:00:00",
-      "End": "2019 -06-01T00:00:00",
-      "ManagementUnit": {
-      "Geometry": "POLYGON((36.372017, -119.648216,36.378081, -119.648216, 36.378141, -119.647111,36.379126, -119.646993,36.379118, -119.644654,36.378694, -119.644557,36.378651, -119.643881,36.373805, -119.643892,36.373779, -119.646081,36.372034, -119.646091))"
-      }
-    }
-
-    const response = await this.post('data/cropgrowth', {body: params}).catch((err) => {console.log(err)})
-    console.log(response)
-    return response
-  }
+  
   
 }
 
@@ -87,6 +120,7 @@ class AgroAPI extends RESTDataSource {
     start.setMonth(start.getMonth() - 6)
     start = (start/1000).toFixed(0)
     const response = await this.get(`image/search?start=${start}&end=${end}&polyid=5e66f15ff6e0ca64d7708957&appid=${API_KEY}`)
+    
     return Array.isArray(response) ? response.map(response => this.imageReducer(response)) : []
   }
 
@@ -98,7 +132,6 @@ class AgroAPI extends RESTDataSource {
     start.setMonth(start.getMonth() - 6)
     start = (start/1000).toFixed(0)
     const response = await this.get(`ndvi/history?start=${start}&end=${end}&polyid=5e66f15ff6e0ca64d7708957&appid=${API_KEY}`)
-    console.log(response)
     return Array.isArray(response) ? response.map(response => this.ndviReducer(response)) : []
   }
 
