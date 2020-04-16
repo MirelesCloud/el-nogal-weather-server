@@ -172,6 +172,7 @@ const typeDefs = gql`
     daily: [Daily]
     series: Series
     mapsDates: [MapsDates]
+    mapLayer(date: String): MapsLayers!
     mapsLayers: [MapsLayers]
     cropGrowth: CropGrowth
     

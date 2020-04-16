@@ -21,10 +21,9 @@ class IrriSatAPI extends RESTDataSource {
     }
   }
 
-  async getMapsLayer() {
-    const date = new Date()
-    const response = await this.get(`maps/layers/2020-04-06`)
-    console.log(response)
+  async getMapsLayer(date) {
+    
+    const response = await this.get(`maps/layers/${date}`)
     return Array.isArray(response.items) ? response.items.map(response => this.mapsLayerReducer(response)) : []
   }
 
@@ -69,10 +68,6 @@ class IrriSatAPI extends RESTDataSource {
       precipitation: response.PrecipProbability
     }
   }
-  
-  
-  
-  
 }
 
 
