@@ -161,6 +161,10 @@ const typeDefs = gql`
     icon: String
   }
 
+  type Mutation {
+    mapDate(date: String): [MapsLayers]
+  }
+
   type Query {
     weather: CurrentWeather
     forecast: [Forecast]
@@ -171,9 +175,6 @@ const typeDefs = gql`
     irrisat: IrriSat
     daily: [Daily]
     series: Series
-    mapsDates: [MapsDates]
-    mapLayer(date: String): MapsLayers!
-    mapsLayers: [MapsLayers]
     cropGrowth: CropGrowth
     
   }
