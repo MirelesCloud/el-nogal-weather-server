@@ -160,6 +160,11 @@ const typeDefs = gql`
     precipitation: Int
     icon: String
   }
+  
+  type MapDates {
+    date: String
+    dateurl: String
+  }
 
   type Mutation {
     mapDate(date: String): [MapsLayers]
@@ -175,6 +180,7 @@ const typeDefs = gql`
     irrisat: IrriSat
     daily: [Daily]
     series: Series
+    mapDates: [MapDates]
     cropGrowth: CropGrowth
     
   }
