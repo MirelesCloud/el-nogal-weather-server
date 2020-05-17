@@ -180,7 +180,7 @@ const typeDefs = gql`
     irrisat: IrriSat
     daily: [Daily]
     series: Series
-    mapLayers(date: String): [MapsLayers]
+    mapLayers(date: String): MapsLayers
     mapDates: [MapDates]
     cropGrowth: CropGrowth
     
