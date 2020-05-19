@@ -23,7 +23,8 @@ class IrriSatAPI extends RESTDataSource {
 
   async getMapsLayer(date) {
     
-    const response = await this.get(`maps/layers/${date}`)
+    const data = date || "2020-04-06"
+    const response = await this.get(`maps/layers/${data}`)
     return Array.isArray(response.items) ? response.items.map(response => this.mapsLayerReducer(response)) : []
   }
 
