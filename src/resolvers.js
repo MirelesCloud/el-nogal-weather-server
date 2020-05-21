@@ -9,10 +9,11 @@ module.exports = {
     daily: (_, __, { dataSources }) => dataSources.irriSatAPI.getEvapoTranspiration(),
     series: (_, __, { dataSources }) => dataSources.irriSatAPI.getEvapoTranspiration(),
     mapDates: (_, __, { dataSources }) => dataSources.irriSatAPI.getMapsDates(),
-    mapLayers: (_, { date }, { dataSources }) => dataSources.irriSatAPI.getMapsLayer(date),
+    //mapLayers: (_, { date }, { dataSources }) => dataSources.irriSatAPI.getMapsLayer(date),
     cropGrowth: (_, __, { dataSources }) => dataSources.irriSatAPI.getCropGrowth(),
+    mapImage: (_, __, { dataSources }) => dataSources.irriSatAPI.getMapsLayer(),
   },
   Mutation: {
-    mapDate: (_, { date }, { dataSources }) => dataSources.irriSatAPI.getMapsLayer(date)
+    //mapDate: (_, { date }, { dataSources }) => dataSources.irriSatAPI.getMapsLayer(date)
   }
 }
