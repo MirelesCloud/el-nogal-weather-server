@@ -11,7 +11,7 @@ module.exports = {
     mapDates: (_, __, { dataSources }) => dataSources.irriSatAPI.getMapsDates(),
     //mapLayers: (_, { date }, { dataSources }) => dataSources.irriSatAPI.getMapsLayer(date),
     cropGrowth: (_, __, { dataSources }) => dataSources.irriSatAPI.getCropGrowth(),
-    mapImage: (_, __, { dataSources }) => dataSources.irriSatAPI.getMapsLayer(),
+    mapImage: (_, { date }, { dataSources }) => dataSources.irriSatAPI.getMapsLayer(date),
   },
   Mutation: {
     //mapDate: (_, { date }, { dataSources }) => dataSources.irriSatAPI.getMapsLayer(date)
