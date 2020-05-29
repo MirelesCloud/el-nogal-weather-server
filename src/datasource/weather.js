@@ -118,7 +118,7 @@ class AgroAPI extends RESTDataSource {
     start = (start/1000).toFixed(0)
     const response = await this.get(`image/search?start=${start}&end=${end}&polyid=5e66f15ff6e0ca64d7708957&appid=${API_KEY}`)
     
-    return Array.isArray(response) ? response.map(response => this.imageReducer(response)) : []
+    return Array.isArray(response) ? response.reverse().map(response => this.imageReducer(response)) : []
   }
 
   async getNDVI() {
